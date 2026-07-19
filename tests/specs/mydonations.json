@@ -1,19 +1,30 @@
 [
   {
-    "name": "/mydonations",
+    "name": "/mydonations shows empty state for new user",
     "steps": [
       {
+        "send": { "text": "/mydonations" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "View donation history and receipts"
-            }
+            "payload": { "text": "No donations yet — tap 💝 Donate to make your first gift!" }
           }
-        ],
-        "send": {
-          "text": "/mydonations"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "My donations button shows empty state",
+    "steps": [
+      {
+        "send": { "callback": "mydonations:view" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          {
+            "method": "sendMessage",
+            "payload": { "text": "No donations yet — tap 💝 Donate to make your first gift!" }
+          }
+        ]
       }
     ]
   }

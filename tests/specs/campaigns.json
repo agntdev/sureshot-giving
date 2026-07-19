@@ -1,19 +1,30 @@
 [
   {
-    "name": "/campaigns",
+    "name": "/campaigns shows empty state when no campaigns exist",
     "steps": [
       {
+        "send": { "text": "/campaigns" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "List active fundraising campaigns with progress indicators"
-            }
+            "payload": { "text": "No active campaigns right now — check back soon!" }
           }
-        ],
-        "send": {
-          "text": "/campaigns"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Campaigns button shows empty state",
+    "steps": [
+      {
+        "send": { "callback": "campaigns:view" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          {
+            "method": "sendMessage",
+            "payload": { "text": "No active campaigns right now — check back soon!" }
+          }
+        ]
       }
     ]
   }

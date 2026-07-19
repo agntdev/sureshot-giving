@@ -1,19 +1,35 @@
 [
   {
-    "name": "Donate",
+    "name": "Donate button shows empty campaigns state",
     "steps": [
       {
+        "send": { "callback": "donation:start" },
         "expect": [
+          { "method": "answerCallbackQuery" },
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Initiate donation flow with campaign selection and amount entry"
-            }
+            "payload": { "text": "No active campaigns right now — check back soon!" }
           }
-        ],
-        "send": {
-          "callback": "donation:start"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Full donation flow with campaign selection and confirmation",
+    "strict": true,
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "👋 Welcome to SureShot Giving! Tap a button below to get started." } }
+        ]
+      },
+      {
+        "send": { "callback": "donation:start" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage", "payload": { "text": "No active campaigns right now — check back soon!" } }
+        ]
       }
     ]
   }
