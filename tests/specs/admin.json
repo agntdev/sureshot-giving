@@ -1,19 +1,30 @@
 [
   {
-    "name": "/admin",
+    "name": "/admin shows access denied for non-owner",
     "steps": [
       {
+        "send": { "text": "/admin" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Admin dashboard for campaign management and data exports"
-            }
+            "payload": { "text": "You don't have admin access." }
           }
-        ],
-        "send": {
-          "text": "/admin"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Admin button shows access denied for non-owner",
+    "steps": [
+      {
+        "send": { "callback": "admin:dashboard" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          {
+            "method": "sendMessage",
+            "payload": { "text": "You don't have admin access." }
+          }
+        ]
       }
     ]
   }
